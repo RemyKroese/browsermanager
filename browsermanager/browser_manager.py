@@ -1,7 +1,8 @@
+
 import subprocess
 import time
 
-import config
+from browsermanager import config
 
 CHROME_PATH = r'C:\Program Files\Google\Chrome\Application\chrome.exe'
 
