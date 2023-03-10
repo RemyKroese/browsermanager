@@ -10,6 +10,7 @@ flake8 = "*"
 autopep8 = "*"
 mock = "*"
 pyinstaller = "*"
+coverage = "*"
 
 [dev-packages]
 
