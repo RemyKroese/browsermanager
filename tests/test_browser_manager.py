@@ -1,6 +1,6 @@
 import mock
 
-import browsermanager.browsermanager as bm
+import browsermanager.browser_manager as bm
 
 
 @mock.patch('subprocess.Popen')
