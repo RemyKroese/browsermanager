@@ -1,6 +1,7 @@
-
 import subprocess
 import time
+
+import config
 
 CHROME_PATH = r'C:\Program Files\Google\Chrome\Application\chrome.exe'
 
@@ -11,15 +12,11 @@ def load_windows(windows):
         time.sleep(1)
         for i in range(1, len(window)):
             subprocess.Popen([CHROME_PATH, window[i]])
+            time.sleep(0.1)
 
 
 def main():
-    window_1 = ['https://www.youtube.com/', 'https://web.whatsapp.com/',
-                'https://outlook.live.com/mail/0/', 'https://trakt.tv/dashboard',
-                'https://www.reddit.com/']
-    window_2 = ['https://teams.microsoft.com/_#/calendarv2', 'https://rwsportal.cloud.com',
-                'https://stackoverflow.com/']
-    windows = [window_1, window_2]
+    windows = config.read()
     load_windows(windows)
 
 
