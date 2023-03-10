@@ -4,9 +4,8 @@ name: Python pytest and flake8 linting
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    branches:
+    - **
 
 jobs:
   build:
@@ -44,5 +43,4 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
         thresholdAll: 0.8
         thresholdNew: 0.9
-        tresholdModified: 0.6
-
+        thresholdModified: 0.6
