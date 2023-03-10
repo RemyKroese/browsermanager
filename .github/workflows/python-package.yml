@@ -2,7 +2,11 @@
 
 name: Python pytest and flake8 linting
 
-on: [ push, pull_request ]
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   build:
