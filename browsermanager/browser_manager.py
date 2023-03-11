@@ -1,8 +1,12 @@
 
+import os
 import subprocess
+import sys
 import time
 
-from browsermanager import config
+sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
+
+from browsermanager import config  # noqa
 
 CHROME_PATH = r'C:\Program Files\Google\Chrome\Application\chrome.exe'
 
