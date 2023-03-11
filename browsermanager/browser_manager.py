@@ -6,7 +6,7 @@ import time
 
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 
-from browsermanager import config  # noqa
+from browsermanager.config import Config  # noqa
 
 CHROME_PATH = r'C:\Program Files\Google\Chrome\Application\chrome.exe'
 
@@ -21,6 +21,7 @@ def load_windows(windows):
 
 
 def main():
+    config = Config()
     windows = config.read()
     load_windows(windows)
 
