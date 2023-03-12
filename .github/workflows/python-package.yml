@@ -26,6 +26,7 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y libxml2-utils
+        sudo apt-get install -y python3-opencv
         pip install pipenv
         pipenv install --deploy --dev
         pipenv run pip list
