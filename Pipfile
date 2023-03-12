@@ -12,8 +12,6 @@ mock = "*"
 pyinstaller = "*"
 coverage = "*"
 pyqt6 = "*"
-xvfbwrapper = "*"
-pytest-xvfb = "*"
 
 [dev-packages]
 
