@@ -11,6 +11,8 @@ autopep8 = "*"
 mock = "*"
 pyinstaller = "*"
 coverage = "*"
+pyqt6 = "*"
+pytest-qt = "*"
 
 [dev-packages]
 
