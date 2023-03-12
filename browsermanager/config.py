@@ -13,6 +13,7 @@ class Config():
     def write(self, windows):
         for i, window in enumerate(windows):
             self.config.add_section('window_' + str(i+1))
+            self.config['window_' + str(i+1)]['run_on_startup'] = 'True'
             for j, url in enumerate(window):
                 self.config['window_' + str(i+1)]['url_' + str(j+1)] = url
         with open(self.config_path, 'w') as config_file:
@@ -22,5 +23,13 @@ class Config():
         self.config.read(self.config_path)
         windows = []
         for section in self.config.sections():
-            windows.append(list(self.config[section].values()))
+            urls = [value for (key, value) in self.config[section].items()
+                    if key != 'run_on_startup']
+            run_on_startup = self.config.getboolean(section, 'run_on_startup') \
+                if self.config.has_option(section, 'run_on_startup') else True
+            window = {'name': section,
+                      'run_on_startup': run_on_startup,
+                      'urls': urls}
+            windows.append(window)
         return windows
+

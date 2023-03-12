@@ -13,8 +13,8 @@ def main():
     config = Config()
     windows = config.read()
     gui = GUI(windows)
+    browser.open_startup_windows(windows)
     gui.show()
-    browser.open_windows(windows)
     gui.execute_app()
 
 

@@ -3,8 +3,18 @@ import mock
 from browsermanager.gui import GUI
 
 
-TEST_WINDOWS = [['b1_u1', 'b1_u2'], ['b2_u1', 'b2_u2', 'b2_u3']]
-
+TEST_WINDOWS = [
+    {
+        'name': 'window 1',
+        'run_on_startup': True,
+        'urls': ['a', 'b']
+    },
+    {
+        'name': 'window 2',
+        'run_on_startup': False,
+        'urls': ['d', 'e']
+    }
+]
 gui = GUI(TEST_WINDOWS)
 
 # TODO: investigate 'WWindows fatal exception: access violation' error with fixtures
@@ -34,7 +44,7 @@ def test_gui__open_checkbox_is_loaded():
     elements = gui.window_elements['open_checkboxes']
     assert len(elements) == 2
     assert elements[0].isEnabled() and elements[0].isChecked()
-    assert elements[1].isEnabled() and elements[1].isChecked()
+    assert elements[1].isEnabled() and not elements[1].isChecked()
 
 
 def test_gui__open_button_is_loaded():
@@ -49,8 +59,8 @@ def test_gui__list_widget_is_loaded():
     items1 = [elements[0].item(x).text() for x in range(elements[0].count())]
     items2 = [elements[1].item(x).text() for x in range(elements[1].count())]
     assert len(elements) == 2
-    assert elements[0].isEnabled() and items1 == TEST_WINDOWS[0]
-    assert elements[1].isEnabled() and items2 == TEST_WINDOWS[1]
+    assert elements[0].isEnabled() and items1 == TEST_WINDOWS[0]['urls']
+    assert elements[1].isEnabled() and items2 == TEST_WINDOWS[1]['urls']
 
 
 @mock.patch('browsermanager.browser.open_window')
