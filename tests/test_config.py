@@ -25,7 +25,24 @@ def test_config__init__keep_config_file_if_one_exists(tmp_path):
 
 
 def test_config__read_config_file():
-    expected_result = [['https://github.com/RemyKroese/browsermanager#readme']]
+    expected_result = [
+        {
+            'name': 'window_1',
+            'run_on_startup': True,
+            'urls': ['a', 'b', 'c']
+        },
+        {
+            'name': 'window_2',
+            'run_on_startup': False,
+            'urls': ['d', 'e']
+        },
+        {
+            'name': 'test_window_name',
+            'run_on_startup': True,
+            'urls': ['f', 'g']
+        },
+    ]
+
     os.chdir(ASSETS)
     config = Config()
     result = config.read()

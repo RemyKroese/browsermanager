@@ -23,11 +23,11 @@ class GUI():
 
         for i, window in enumerate(windows):
             header_layout = QtWidgets.QHBoxLayout()
-            header = QtWidgets.QLabel('window ' + str(i + 1))
+            header = QtWidgets.QLabel(window['name'])
             header_layout.addWidget(header)
 
             open_checkbox = QtWidgets.QCheckBox("Open on startup")
-            open_checkbox.setChecked(True)
+            open_checkbox.setChecked(window['run_on_startup'])
             header_layout.addWidget(open_checkbox)
 
             open_button = QtWidgets.QPushButton('Open')
@@ -35,7 +35,7 @@ class GUI():
             header_layout.addWidget(open_button)
 
             list_widget = QtWidgets.QListWidget()
-            for url in window:
+            for url in window['urls']:
                 QtWidgets.QListWidgetItem(url, list_widget)
             self.overview_layout.addLayout(header_layout, 0, i)
             self.overview_layout.addWidget(list_widget, 1, i)
@@ -49,6 +49,7 @@ class GUI():
         self.gui.setLayout(self.overview_layout)
 
     def open_window_clicked(self, window):
+        print('clicked..')
         browser.open_window(window)
 
     def show(self):
