@@ -1,6 +1,4 @@
 import mock
-import pytest
-from PyQt6 import QtCore
 
 from browsermanager.gui import GUI
 
@@ -59,10 +57,6 @@ def test_gui__list_widget_is_loaded():
 def test_open_button_clicked__calls_open_window_clicked(open_window):
     gui.window_elements['open_buttons'][0].click()
     assert open_window.call_count == 1
-# @mock.patch('browsermanager.gui.GUI.open_window_clicked')
-# def test_open_button_clicked__calls_open_window_clicked(open_window_clicked, gui, qtbot):
-#     qtbot.mouseClick(gui.window_elements['open_buttons'][0], QtCore.Qt.MouseButton.LeftButton)
-#     assert open_window_clicked.call_count == 1
 
 
 @mock.patch('PyQt6.QtWidgets.QWidget.show')
