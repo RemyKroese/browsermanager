@@ -1,6 +1,6 @@
 # This workflow will install Python dependencies, run tests and lint with Python 3.9
 
-name: Python pytest and flake8 linting
+name: Python pytest, coverage, and flake8 linting
 
 on:
   push:
@@ -24,6 +24,7 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: Install dependencies
       run: |
+        apt-get update && apt-get install libgl1
         pip install pipenv
         pipenv install --deploy --dev
         pipenv run pip list
