@@ -55,7 +55,9 @@ def test_gui__list_widget_is_loaded(gui):
 
 @mock.patch('browsermanager.gui.GUI.open_window_clicked')
 def test_open_button_clicked__calls_open_window_clicked(open_window_clicked, gui, qtbot):
+    print('1')
     qtbot.mouseClick(gui.window_elements['open_buttons'][0], QtCore.Qt.MouseButton.LeftButton)
+    print('2')
     assert open_window_clicked.call_count == 1
 
 

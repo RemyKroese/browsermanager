@@ -25,7 +25,7 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install libgl1
+        sudo apt-get install -y libxml2-utils
         pip install pipenv
         pipenv install --deploy --dev
         pipenv run pip list
