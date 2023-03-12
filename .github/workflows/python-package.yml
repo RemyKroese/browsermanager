@@ -27,6 +27,7 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y libgles2-mesa-dev
+        sudo apt-get install -y xvfb
         pip install pipenv
         pipenv install --deploy --dev
         pipenv run pip list
@@ -38,7 +39,7 @@ jobs:
         pipenv run flake8 . --count --exit-zero --max-complexity=10 --max-line-length=100 --statistics
     - name: Test with pytest
       run: |
-        pipenv run coverage run --branch --omit '*test*,*__init__.py' -m pytest
+        xvfb-run pipenv run coverage run --branch --omit '*test*,*__init__.py' -m pytest
         pipenv run coverage xml
     - name: Python coverage
       uses: orgoro/coverage@v3
