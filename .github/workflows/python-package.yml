@@ -1,6 +1,6 @@
 # This workflow will install Python dependencies, run tests and lint with Python 3.9
 
-name: Python pytest and flake8 linting
+name: Python pytest, coverage, and flake8 linting
 
 on:
   push:
@@ -10,12 +10,10 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     strategy:
       matrix:
         python-version: ['3.11']
-
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python ${{ matrix.python-version }}
@@ -24,6 +22,9 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: Install dependencies
       run: |
+        sudo apt-get update
+        sudo apt-get install -y xvfb
+        sudo apt-get install -y libgles2-mesa-dev libxkbcommon-x11-0 libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-randr0 libxcb-render-util0 libxcb-xinerama0 libxcb-xfixes0 x11-utils
         pip install pipenv
         pipenv install --deploy --dev
         pipenv run pip list
@@ -35,7 +36,7 @@ jobs:
         pipenv run flake8 . --count --exit-zero --max-complexity=10 --max-line-length=100 --statistics
     - name: Test with pytest
       run: |
-        pipenv run coverage run --branch --omit '*test*,*__init__.py' -m pytest
+        xvfb-run pipenv run coverage run --branch --omit '*test*,*__init__.py' -m pytest
         pipenv run coverage xml
     - name: Python coverage
       uses: orgoro/coverage@v3
