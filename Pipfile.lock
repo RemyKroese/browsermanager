@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "40f4f62dc19dabf3b49d241b0e0f4a42b881ebc1cb06e40143549afd072c033c"
+            "sha256": "fdbd368484c9da4c141eb60f3c5c558cf3f4c1428479ad374465093efd5561be"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -259,6 +259,21 @@
             "index": "pypi",
             "version": "==4.2.0"
         },
+        "pytest-xvfb": {
+            "hashes": [
+                "sha256:6d21b46f099c06d6b8b200e73341da3adb73d67e9139c55d617930881779360b",
+                "sha256:c4ba642de05499940db7f65ee111621939be513e3e75c3da9156b7235e2ed8cf"
+            ],
+            "index": "pypi",
+            "version": "==2.0.0"
+        },
+        "pyvirtualdisplay": {
+            "hashes": [
+                "sha256:09755bc3ceb6eb725fb07eca5425f43f2358d3bf08e00d2a9b792a1aedd16159",
+                "sha256:40d4b8dfe4b8de8552e28eb367647f311f88a130bf837fe910e7f180d5477f0e"
+            ],
+            "version": "==3.0"
+        },
         "pywin32-ctypes": {
             "hashes": [
                 "sha256:24ffc3b341d457d48e8922352130cf2644024a4ff09762a2261fd34c36ee5942",
@@ -274,6 +289,13 @@
             ],
             "markers": "python_version >= '3.7'",
             "version": "==67.6.0"
+        },
+        "xvfbwrapper": {
+            "hashes": [
+                "sha256:bcf4ae571941b40254faf7a73432dfc119ad21ce688f1fdec533067037ecfc24"
+            ],
+            "index": "pypi",
+            "version": "==0.2.9"
         }
     },
     "develop": {}
