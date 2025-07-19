@@ -1,6 +1,7 @@
 import os
 import sys
 from PyQt6 import QtWidgets
+from screeninfo import get_monitors
 
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 
@@ -49,11 +50,17 @@ class GUI():
         self.gui.setLayout(self.overview_layout)
 
     def open_window_clicked(self, window):
-        print('clicked..')
-        browser.open_window(window)
+        browser.open_window(window, 'firefox', sort_monitors_by_windows_order(get_monitors()))
 
     def show(self):
         self.gui.show()
 
     def execute_app(self):
         self.app.exec()
+
+
+# TODO: refactor code structure
+def sort_monitors_by_windows_order(monitors):
+    # sort the list of displays by their windows display name (e.g. DISPLAY1, DISPLAY2)
+    # string length sorting done too for the lunatics who have 10 or more displays
+    return sorted(monitors, key=lambda m: (len(m.name), m.name))
