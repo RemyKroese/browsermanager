@@ -13,7 +13,7 @@ def main():
     config = Config()
     windows = config.read()
     gui = GUI(windows)
-    browser.open_startup_windows(windows)
+    browser.open_startup_windows(windows, browser='firefox')
     gui.show()
     gui.execute_app()
 

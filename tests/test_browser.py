@@ -12,7 +12,7 @@ def test_open_startup_windows__open_one_window_with_one_tab(m_subprocess_Popen):
             'urls': ['a']
         }
     ]
-    b.open_startup_windows(test_windows)
+    b.open_startup_windows(test_windows, 'firefox')
     assert m_subprocess_Popen.call_count == 1
 
 
@@ -25,7 +25,7 @@ def test_open_startup_windows__open_one_window_with_multiple_tabs(m_subprocess_P
             'urls': ['a', 'b']
         }
     ]
-    b.open_startup_windows(test_windows)
+    b.open_startup_windows(test_windows, 'chrome')
     assert m_subprocess_Popen.call_count == 2
 
 
@@ -43,7 +43,7 @@ def test_open_startup_windows__open_multiple_windows_with_multiple_tabs(m_subpro
             'urls': ['d', 'e']
         }
     ]
-    b.open_startup_windows(test_windows)
+    b.open_startup_windows(test_windows, '')
     assert m_subprocess_Popen.call_count == 4
 
 
@@ -56,5 +56,5 @@ def test_open_startup_windows__window_not_opened_when_run_on_startup_is_false(m_
             'urls': ['a', 'b']
         }
     ]
-    b.open_startup_windows(test_windows)
+    b.open_startup_windows(test_windows, '')
     assert m_subprocess_Popen.call_count == 0
