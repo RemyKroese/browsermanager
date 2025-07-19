@@ -24,11 +24,14 @@ class Config():
         windows = []
         for section in self.config.sections():
             urls = [value for (key, value) in self.config[section].items()
-                    if key != 'run_on_startup']
+                    if key not in ['run_on_startup', 'monitor']]
             run_on_startup = self.config.getboolean(section, 'run_on_startup') \
                 if self.config.has_option(section, 'run_on_startup') else True
+            monitor = self.config.getint(section, 'monitor') \
+                if self.config.has_option(section, 'monitor') else 1
             window = {'name': section,
                       'run_on_startup': run_on_startup,
+                      'monitor': monitor,
                       'urls': urls}
             windows.append(window)
         return windows

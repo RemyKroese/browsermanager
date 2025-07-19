@@ -28,16 +28,19 @@ def test_config__read_config_file():
     expected_result = [
         {
             'name': 'window_1',
+            'monitor': 1,
             'run_on_startup': True,
             'urls': ['a', 'b', 'c']
         },
         {
             'name': 'window_2',
+            'monitor': 2,
             'run_on_startup': False,
             'urls': ['d', 'e']
         },
         {
             'name': 'test_window_name',
+            'monitor': 1,
             'run_on_startup': True,
             'urls': ['f', 'g']
         },

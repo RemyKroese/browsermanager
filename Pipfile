@@ -12,6 +12,8 @@ mock = "*"
 pyinstaller = "*"
 coverage = "*"
 pyqt6 = "*"
+screeninfo = "*"
+pygetwindow = "*"
 
 [dev-packages]
 
