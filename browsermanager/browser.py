@@ -15,35 +15,55 @@ def open_startup_windows(windows, browser, monitors):
 def open_window(window, browser, monitors):
     if browser == 'firefox':
         browser_path = FIREFOX_PATH
-        title_match = 'Mozilla Firefox'
     elif browser == 'chrome':
         browser_path = CHROME_PATH
-        title_match = 'Google Chrome'
     else:
         browser_path = 'explorer'
-        title_match = ''  # fallback
 
     urls = window['urls']
-    before = [w for w in gw.getWindowsWithTitle(title_match) if w.visible]
+    before = get_window_handles()
     subprocess.Popen([browser_path, '--new-window', urls[0]])
-    ff_window = wait_for_new_window(before, title_match)
+    ff_window = wait_for_new_window(before)
     position_window(ff_window, monitors[window['monitor']-1])
-    for i in range(1, len(urls)):
-        subprocess.Popen([browser_path, urls[i]])
+    for url in urls[1:]:
+        subprocess.Popen([browser_path, url])
         time.sleep(0.5)
 
 
-def wait_for_new_window(before, title_contains, timeout=5, check_interval=0.1):
+def get_hwnd(win):
+    """
+    Safely retrieves the HWND (handle to a window) from a pygetwindow.Window object.
+
+    _hWnd is a Windows-specific identifier (HWND) that uniquely identifies a window.
+    pygetwindow exposes it internally via the _hWnd attribute.
+    """
+    return getattr(win, '_hWnd', None)
+
+
+def get_window_handles():
+    """
+    Returns a set of handles (_hWnd) for all currently visible windows.
+    """
+    return set(get_hwnd(win) for win in gw.getAllWindows() if win.visible)
+
+
+def wait_for_new_window(before, timeout=5, check_interval=0.1):
+    """
+    Waits for a new visible window to appear that wasn't in the 'before' set.
+    """
     checks = int(timeout / check_interval)
     for _ in range(checks):
-        after = [w for w in gw.getWindowsWithTitle(title_contains) if w.visible]
-        new_windows = [w for w in after if w not in before]
-        if new_windows:
-            return new_windows[0]
+        new_handles = get_window_handles() - before
+        for win in gw.getAllWindows():
+            if get_hwnd(win) in new_handles and win.visible:
+                return win
         time.sleep(check_interval)
     raise TimeoutError(f'No new window appeared within {timeout} seconds.')
 
 
 def position_window(window, monitor):
+    """
+    Moves and resizes the given window to match the specified monitor's geometry.
+    """
     window.moveTo(monitor.x, monitor.y)
     window.resizeTo(monitor.width, monitor.height)
