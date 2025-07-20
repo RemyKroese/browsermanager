@@ -2,7 +2,7 @@
 import filecmp
 import os
 
-from browsermanager.config import Config
+from core.config import Config
 
 ASSETS = os.path.join(os.path.dirname(__file__), 'assets/')
 
