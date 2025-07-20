@@ -5,10 +5,9 @@ from gui.main_window import MainWindow
 
 def main():
     config = Config()
-    windows = config.read()
     browser_manager = BrowserManager(browser='firefox')
-    gui = MainWindow(browser_manager, windows)
-    browser_manager.open_startup_windows(windows)
+    gui = MainWindow(browser_manager, config.config['windows'])
+    browser_manager.open_startup_windows(config.config['windows'])
     gui.show()
     gui.execute_app()
 

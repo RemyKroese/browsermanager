@@ -1,0 +1,22 @@
+windows:
+  - name: window_1
+    run_on_startup: true
+    monitor: 1
+    urls:
+      - a
+      - b
+      - c
+
+  - name: window_2
+    run_on_startup: false
+    monitor: 2
+    urls:
+      - d
+      - e
+
+  - name: test_window_name
+    run_on_startup: false
+    monitor: 2
+    urls:
+      - f
+      - g

@@ -1,0 +1,6 @@
+windows:
+- name: window_1
+  run_on_startup: true
+  monitor: 1
+  urls:
+  - https://github.com/RemyKroese/browsermanager#readme
