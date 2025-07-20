@@ -4,18 +4,18 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-pytest = "*"
-pycodestyle = "*"
-flake8 = "*"
-autopep8 = "*"
-mock = "*"
-pyinstaller = "*"
-coverage = "*"
 pyqt6 = "*"
 screeninfo = "*"
 pygetwindow = "*"
 
 [dev-packages]
+autopep8 = "*"
+coverage = "*"
+flake8 = "*"
+mock = "*"
+pycodestyle = "*"
+pyinstaller = "*"
+pytest = "*"
 
 [requires]
 python_version = "3.11"

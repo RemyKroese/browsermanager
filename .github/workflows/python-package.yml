@@ -10,24 +10,24 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     strategy:
       matrix:
         python-version: ['3.11']
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
+        architecture: 'x64'
     - name: Install dependencies
       run: |
-        sudo apt-get update
-        sudo apt-get install -y xvfb
-        sudo apt-get install -y libgles2-mesa-dev libxkbcommon-x11-0 libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-randr0 libxcb-render-util0 libxcb-xinerama0 libxcb-xfixes0 x11-utils
         pip install pipenv
-        pipenv install --deploy --dev
+        pipenv --python C:/hostedtoolcache/windows/Python/3.11.9/x64/python.exe install --deploy --dev
         pipenv run pip list
+    - name: Check Python path
+      run: where python
     - name: Lint with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names
@@ -36,7 +36,7 @@ jobs:
         pipenv run flake8 . --count --exit-zero --max-complexity=10 --max-line-length=100 --statistics
     - name: Test with pytest
       run: |
-        xvfb-run pipenv run coverage run --branch --omit '*test*,*__init__.py' -m pytest
+        pipenv run coverage run --branch --omit '*test*,*__init__.py' -m pytest
         pipenv run coverage xml
     - name: Python coverage
       uses: orgoro/coverage@v3.1
