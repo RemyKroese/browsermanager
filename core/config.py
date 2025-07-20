@@ -1,38 +1,28 @@
-import configparser
-import os
+import yaml
 
 
-class Config():
-    def __init__(self, config_path='config.ini'):
-        self.config = configparser.ConfigParser()
+class Config:
+    def __init__(self, config_path='config.yaml'):
         self.config_path = config_path
-        if not os.path.isfile(self.config_path):
-            new_window = ['https://github.com/RemyKroese/browsermanager#readme']
-            self.write([new_window])
+        self.config = self.read()
 
-    def write(self, windows):
-        for i, window in enumerate(windows):
-            self.config.add_section('window_' + str(i+1))
-            self.config['window_' + str(i+1)]['run_on_startup'] = 'True'
-            for j, url in enumerate(window):
-                self.config['window_' + str(i+1)]['url_' + str(j+1)] = url
-        with open(self.config_path, 'w') as config_file:
-            self.config.write(config_file)
+    def write(self, config):
+        with open(self.config_path, 'w') as f:
+            yaml.dump(config, f, sort_keys=False, default_flow_style=False, indent=2)
 
     def read(self):
-        self.config.read(self.config_path)
-        windows = []
-        for section in self.config.sections():
-            urls = [value for (key, value) in self.config[section].items()
-                    if key not in ['run_on_startup', 'monitor']]
-            run_on_startup = self.config.getboolean(section, 'run_on_startup') \
-                if self.config.has_option(section, 'run_on_startup') else True
-            monitor = self.config.getint(section, 'monitor') \
-                if self.config.has_option(section, 'monitor') else 1
-            window = {'name': section,
-                      'run_on_startup': run_on_startup,
-                      'monitor': monitor,
-                      'urls': urls}
-            windows.append(window)
-        return windows
-
+        try:
+            with open(self.config_path, 'r') as f:
+                return yaml.safe_load(f)
+        except FileNotFoundError:
+            config = {
+                'windows': [
+                    {
+                        'name': 'window_1',
+                        'run_on_startup': True,
+                        'monitor': 1,
+                        'urls': ['https://github.com/RemyKroese/browsermanager#readme']
+                    }],
+            }
+            self.write(config)
+            return config

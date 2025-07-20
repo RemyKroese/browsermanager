@@ -1,0 +1,22 @@
+windows:
+  - name: Main
+    run_on_startup: true
+    monitor: 2
+    urls:
+      - https://youtube.com/
+      - https://trakt.tv/dashboard
+      - https://reddit.com/
+
+  - name: Work
+    run_on_startup: true
+    monitor: 1
+    urls:
+      - https://reddit.com/
+      - https://github.com/
+
+  - name: League of Legends
+    run_on_startup: true
+    monitor: 2
+    urls:
+      - https://www.op.gg/summoners/euw/knurblewobblebob
+      - https://lolpros.gg/live

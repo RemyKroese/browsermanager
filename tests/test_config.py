@@ -8,8 +8,8 @@ ASSETS = os.path.join(os.path.dirname(__file__), 'assets/')
 
 
 def test_config__init__create_basic_config_file_if_none_exists(tmp_path):
-    expected_config_file = ASSETS + 'new_config.ini'
-    new_config_file = tmp_path / 'config.ini'
+    expected_config_file = ASSETS + 'new_config.yaml'
+    new_config_file = tmp_path / 'config.yaml'
     os.chdir(tmp_path)
     Config()
     assert os.path.exists(new_config_file)
@@ -17,7 +17,7 @@ def test_config__init__create_basic_config_file_if_none_exists(tmp_path):
 
 
 def test_config__init__keep_config_file_if_one_exists(tmp_path):
-    empty_config_file = (tmp_path / 'config.ini')
+    empty_config_file = (tmp_path / 'config.yaml')
     empty_config_file.touch()
     os.chdir(tmp_path)
     Config()
@@ -25,7 +25,7 @@ def test_config__init__keep_config_file_if_one_exists(tmp_path):
 
 
 def test_config__read_config_file():
-    expected_result = [
+    expected_result = {'windows': [
         {
             'name': 'window_1',
             'monitor': 1,
@@ -40,13 +40,12 @@ def test_config__read_config_file():
         },
         {
             'name': 'test_window_name',
-            'monitor': 1,
-            'run_on_startup': True,
+            'monitor': 2,
+            'run_on_startup': False,
             'urls': ['f', 'g']
         },
-    ]
+    ]}
 
     os.chdir(ASSETS)
     config = Config()
-    result = config.read()
-    assert expected_result == result
+    assert expected_result['windows'] == config.config['windows']

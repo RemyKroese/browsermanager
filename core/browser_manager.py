@@ -55,7 +55,7 @@ class BrowserManager():
         self.position_window(ff_window, self.monitors[window['monitor']-1])
         for url in urls[1:]:
             subprocess.Popen([self.browser_path, url])
-            time.sleep(0.5)
+            time.sleep(0.3)
 
     def wait_for_new_window(self, before, timeout=5, check_interval=0.1):
         """
